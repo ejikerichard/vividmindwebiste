@@ -1,9 +1,7 @@
-import Footer from './components/Footer';
 import Contact from './components/Contact';
-import Philosophy from './components/Philosophy';
 import Featured from './components/Featured';
 import Hero from './components/Hero';
-import Nav from './components/Nav';
+import Philosophy from './components/Philosophy';
 
 export default function Home() {
   return (
