@@ -15,7 +15,7 @@ const Hero = () => {
         We believe in creating <span>meaninful experiences</span> that resonate
         with <span>players</span>.
       </motion.h1>
-      <div className="group grid grid-cols-4 grid-rows-3 xl:grid-rows-4 perspective-normal mt-16 lg:mt-0">
+      <div className="group grid grid-cols-6 grid-rows-3 xl:grid-rows-4 perspective-normal mt-16 lg:mt-0">
         <div className="relative col-start-4 row-start-1 xl:col-start-3 xl:row-start-1 skew-1 xl:translate-z-12 rotate-x-0 backface-hidden transform-3d group-hover:skew-0 group-hover:translate-y-1 group-hover:-translate-x-1 group-hover:rotate-x-1 transition-all duration-300 hover:animate-bounce">
           <Image
             src="/images/hero1.webp"
@@ -46,7 +46,7 @@ const Hero = () => {
           />
           <div className="absolute top-0 left-1 right-2 -rotate-20 xl:-translate-x-7 -translate-y-4 w-20 h-32 xl:w-28 xl:h-42 -z-10 rounded-full bg-[url('/images/hero-bg3.jpeg')]"></div>
         </div>
-        <div className="relative col-start-3 xl:col-start-4 row-start-3 xl:row-start-2 translate-z-12 rotate-x-0 group-hover:animate-bounce -mt-16 ml-8 xl:mt-0 xl:ml-0">
+        <div className="relative col-start-3 col-span-2 md:col-span-1 xl:col-start-4 row-start-3 xl:row-start-2 translate-z-12 rotate-x-0 group-hover:animate-bounce -mt-16 ml-8 xl:mt-0 xl:ml-0">
           <Image
             src="/images/hero4.png"
             alt="Hero Image"
