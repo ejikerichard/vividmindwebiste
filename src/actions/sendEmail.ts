@@ -6,7 +6,6 @@ import { z } from "zod";
 const ContactSchema = z.object({
   name:         z.string().min(2, "Name must be at least 2 characters"),
   email:        z.email("Invalid email address"),
-  companyName:  z.string().min(2, "Company name is required"),
   subject:      z.string().min(3, "Subject must be at least 3 characters"),
   message:      z.string().min(5, "Please write a detailed message"),
 });
@@ -25,7 +24,6 @@ export async function submitContactForm(
   const data = {
     name:        formData.get("name") as string,
     email:       formData.get("email") as string,
-    companyName: formData.get("companyName") as string,
     subject:     formData.get("subject") as string,
     message:     formData.get("message") as string,
   };
@@ -47,6 +45,9 @@ export async function submitContactForm(
 
   const validatedData = result.data;
 
+  console.log(validatedData);
+  
+
   try {
     const emailResult = await sendEmail({
       fromUserEmail: validatedData.email,
@@ -54,9 +55,7 @@ export async function submitContactForm(
       text: `
         Name: ${validatedData.name}
         Email: ${validatedData.email}
-        Company: ${validatedData.companyName}
         Subject: ${validatedData.subject}
-        
         Message:
         ${validatedData.message}
       `,
@@ -65,7 +64,6 @@ export async function submitContactForm(
           <h2>New Contact Form Submission</h2>
           <p><strong>Name:</strong> ${validatedData.name}</p>
           <p><strong>Email:</strong> ${validatedData.email}</p>
-          <p><strong>Company:</strong> ${validatedData.companyName}</p>
           <p><strong>Subject:</strong> ${validatedData.subject}</p>
           <hr />
           <h3>Message:</h3>

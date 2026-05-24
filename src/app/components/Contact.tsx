@@ -134,22 +134,6 @@ const Contact = () => {
                 )}
               </label>
             </div>
-            <label htmlFor="company">
-              <span aria-label="company name">Company Name*</span>
-              <input
-                type="text"
-                placeholder="Your Company Name"
-                id="company"
-                name="companyName"
-                aria-label="company name"
-                className={`${state?.errors?.companyName && 'outline outline-primary'} w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent`}
-              />
-              {state?.errors?.companyName && (
-                <p className="text-red-500 text-sm mt-1">
-                  {state.errors.companyName}
-                </p>
-              )}
-            </label>
             <label htmlFor="subject">
               <span aria-label="subject">Subject*</span>
               <input
