@@ -144,7 +144,7 @@ const Hero = () => {
             x: layer2X,
             y: layer2Y,
           }}
-          className="absolute -bottom-10 lg:relative lg:-bottom-40 xl:left-1/2 col-start-3 col-span-2 md:col-span-1 xl:col-start-4 row-start-3 xl:row-start-2 translate-z-12 rotate-x-0 -mt-16 ml-8 xl:mt-0 xl:ml-0"
+          className="max-w-max absolute -bottom-10 lg:relative lg:-bottom-40 xl:left-1/2 col-start-3 col-span-2 md:col-span-1 xl:col-start-4 row-start-3 xl:row-start-2 translate-z-12 rotate-x-0 -mt-16 ml-8 xl:mt-0 xl:ml-0"
         >
           <Image
             src="/images/hero/hero-4.png"
