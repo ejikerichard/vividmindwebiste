@@ -66,7 +66,7 @@ const Contact = () => {
                 <FaInstagram />
               </Link>
             </div>
-            <div className="bg-primary p-3 lg:p-4 shadow-2xl rounded-full text-xl lg:text-3xl">
+            <div className="bg-primary p-2 lg:p-3 shadow-2xl rounded-full">
               <Link
                 href="https://www.facebook.com/vividmindgames/"
                 target="_blank"
@@ -84,7 +84,7 @@ const Contact = () => {
                 <FaTwitter />
               </Link>
             </div>
-            <div className="bg-primary p-3 lg:p-4 shadow-2xl rounded-full text-xl lg:text-3xl">
+            <div className="bg-primary p-2 lg:p-3 shadow-2xl rounded-full">
               <Link
                 href="https://www.youtube.com/@VividMindGames"
                 target="_blank"

@@ -24,14 +24,14 @@ const Featured = () => {
         clever, addictive puzzle games.
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-8">
         <div>
           <Image
             src="/images/run-punch.png"
             height={198}
             width={352}
             alt="run punch image"
-            className="w-full md:w-88 h-49.5"
+            className="w-full md:w-88 lg:w-full h-60.5"
           />
           <div className="mt-3 text-left">
             <h3 className="text-lg text-secondary">Run Punch</h3>
@@ -61,7 +61,7 @@ const Featured = () => {
           <Image
             src="/images/battle-crown.png"
             alt="run battle crown image"
-            className="w-full md:w-88 h-49.5"
+            className="w-full md:w-88 lg:w-full h-60.5"
             height={198}
             width={352}
           />

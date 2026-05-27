@@ -1,9 +1,56 @@
 'use client';
 
-import { motion } from 'motion/react';
+import { useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import Image from 'next/image';
 
 const Hero = () => {
+  const containerRef = useRef(null);
+
+  // Single base source of truth for mouse position (-1 to 1 range)
+  const basePositionX = useMotionValue(0);
+  const basePositionY = useMotionValue(0);
+
+  // Smooth spring physics configuration
+  const springConfig = { damping: 25, stiffness: 180 };
+  const smoothX = useSpring(basePositionX, springConfig);
+  const smoothY = useSpring(basePositionY, springConfig);
+
+  // 4 Distinct Speeds (Negative values move opposite to the mouse)
+  // Layer 1 (Backpoint) -> Layer 4 (Frontpoint)
+  const layer1X = useTransform(smoothX, [-1, 1], [15, -15]);
+  const layer1Y = useTransform(smoothY, [-1, 1], [15, -15]);
+
+  const layer2X = useTransform(smoothX, [-1, 1], [35, -35]);
+  const layer2Y = useTransform(smoothY, [-1, 1], [35, -35]);
+
+  const layer3X = useTransform(smoothX, [-1, 1], [60, -60]);
+  const layer3Y = useTransform(smoothY, [-1, 1], [60, -60]);
+
+  const layer4X = useTransform(smoothX, [-1, 1], [90, -90]);
+  const layer4Y = useTransform(smoothY, [-1, 1], [90, -90]);
+
+  const handleMouseMove = (e) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    // Normalize coordinates to a clean -1 to 1 range
+    const normX = (e.clientX - centerX) / (rect.width / 2);
+    const normY = (e.clientY - centerY) / (rect.height / 2);
+
+    basePositionX.set(normX);
+    basePositionY.set(normY);
+  };
+
+  const handleMouseLeave = () => {
+    // Return all 4 layers smoothly to dead-center
+    basePositionX.set(0);
+    basePositionY.set(0);
+  };
+
   return (
     <header className="section min-h-[86vh] grid grid-cols-1 lg:grid-cols-2 items-center place-content-center">
       <motion.h1
@@ -15,47 +62,105 @@ const Hero = () => {
         We believe in creating <span>meaninful experiences</span> that resonate
         with <span>players</span>.
       </motion.h1>
-      <div className="group grid grid-cols-6 grid-rows-3 xl:grid-rows-4 perspective-normal mt-16 lg:mt-0">
-        <div className="relative col-start-4 row-start-1 xl:col-start-3 xl:row-start-1 skew-1 xl:translate-z-12 rotate-x-0 backface-hidden transform-3d group-hover:skew-0 group-hover:translate-y-1 group-hover:-translate-x-1 group-hover:rotate-x-1 transition-all duration-300 hover:animate-bounce">
+      <div
+        ref={containerRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="relative h-[40vh] xl:h-auto perspective-normal mt-16 lg:mt-0"
+      >
+        <motion.div
+          style={{
+            x: layer3X,
+            y: layer3Y,
+          }}
+          className="absolute top-0 left-1/3 lg:-top-44 lg:left-1/2 col-start-4 row-start-1 xl:col-start-3 xl:row-start-1 skew-1 xl:translate-z-12 rotate-x-0 backface-hidden transform-3d group-hover:skew-0"
+        >
+          <div>
+            <Image
+              src="/images/hero/hero-1.png"
+              alt="Hero Image"
+              width={140}
+              height={160}
+              className="object-contain w-60 h-60"
+            />
+          </div>
+          <motion.div
+            style={{
+              x: layer1X,
+              y: layer1Y,
+            }}
+            className="absolute left-1/2 top-0 rotate-20 -translate-x-1/2 w-24 xl:w-28 h-38 xl:h-42 -z-10 rounded-full bg-[url('/images/hero-bg1.jpeg')] transition-all duration-300"
+          ></motion.div>
+        </motion.div>
+
+        <motion.div
+          style={{
+            x: layer2X,
+            y: layer2Y,
+          }}
+          className="absolute -left-10 lg:-top-14 lg:left-24 col-start-2 row-start-1 xl:col-start-2 xl:row-start-2 skew-1 translate-z-12 rotate-x-0"
+        >
           <Image
-            src="/images/hero1.webp"
-            alt="Hero Image"
-            width={140}
-            height={160}
-            className="object-contain w-24 h-28 xl:w-28 xl:h-32"
-          />
-          <div className="absolute top-0 left-3 right-2 group-hover:rotate-12 rotate-20 -translate-y-7 w-24 xl:w-28 h-38 xl:h-42 -z-10 rounded-full bg-[url('/images/hero-bg1.jpeg')] transition-all duration-300"></div>
-        </div>
-        <div className="relative col-start-2 row-start-1 xl:col-start-2 xl:row-start-2 skew-1 translate-z-12 rotate-x-0 group-hover:translate-y-3 group-hover:-translate-x-3 group-hover:rotate-x-6 transition-all duration-300 hover:animate-bounce">
-          <Image
-            src="/images/hero2.webp"
+            src="/images/hero/hero-2.png"
             alt="Hero Image"
             width={120}
             height={140}
-            className="object-contain w-28 h-24 xl:w-32 xl:h-28"
+            className="object-contain w-60 h-60"
           />
-          <div className="absolute top-0 left-1 right-2 -rotate-20 -translate-x-7 translate-y-4 w-32 h-28 xl:w-40 xl:h-32 -z-10 rounded-full bg-[url('/images/hero-bg2.jpeg')]"></div>
-        </div>
-        <div className="relative col-start-2 row-start-3 xl:col-start-4 xl:row-start-3 skew-1 translate-z-12 rotate-x-0 group-hover:-translate-y-3 group-hover:-translate-x-3 group-hover:rotate-x-6 transition-all duration-300 hover:animate-bounce">
+          <motion.div
+            style={{
+              x: layer1X,
+              y: layer1Y,
+            }}
+            className="absolute bottom-0 left-1/2 -rotate-20 -translate-x-1/2 translate-y-4 w-32 h-28 xl:w-40 xl:h-32 -z-10 rounded-full bg-[url('/images/hero-bg2.jpeg')]"
+          ></motion.div>
+        </motion.div>
+
+        <motion.div
+          style={{
+            x: layer2X,
+            y: layer2Y,
+          }}
+          className="absolute top-48 right-16 lg:top-16 lg:right-0 col-start-2 row-start-3 xl:col-start-4 xl:row-start-3 skew-1 translate-z-12 rotate-x-0"
+        >
           <Image
-            src="/images/hero3.png"
+            src="/images/hero/hero-3.png"
             alt="Hero Image"
-            width={140}
+            width={128}
             height={160}
-            className="object-contain"
+            className="object-contain w-48 h-48"
           />
-          <div className="absolute top-0 left-1 right-2 -rotate-20 xl:-translate-x-7 -translate-y-4 w-20 h-32 xl:w-28 xl:h-42 -z-10 rounded-full bg-[url('/images/hero-bg3.jpeg')]"></div>
-        </div>
-        <div className="relative col-start-3 col-span-2 md:col-span-1 xl:col-start-4 row-start-3 xl:row-start-2 translate-z-12 rotate-x-0 group-hover:animate-bounce -mt-16 ml-8 xl:mt-0 xl:ml-0">
+          <motion.div
+            style={{
+              x: layer1X,
+              y: layer1Y,
+            }}
+            className="absolute bottom-0 left-1/2 -rotate-20 xl:-translate-x-7 -translate-y-4 w-20 h-32 xl:w-28 xl:h-42 -z-10 rounded-full bg-[url('/images/hero-bg3.jpeg')]"
+          ></motion.div>
+        </motion.div>
+
+        <motion.div
+          style={{
+            x: layer2X,
+            y: layer2Y,
+          }}
+          className="absolute -bottom-10 lg:relative lg:-bottom-40 xl:left-1/2 col-start-3 col-span-2 md:col-span-1 xl:col-start-4 row-start-3 xl:row-start-2 translate-z-12 rotate-x-0 -mt-16 ml-8 xl:mt-0 xl:ml-0"
+        >
           <Image
-            src="/images/hero4.png"
+            src="/images/hero/hero-4.png"
             alt="Hero Image"
-            width={170}
-            height={160}
-            className="object-contain w-32 h-32"
+            width={270}
+            height={360}
+            className="object-contain w-44 h-44"
           />
-          <div className="absolute top-0 left-1 right-2 -rotate-20 xl:translate-x-7 xl:-translate-y-4 w-32 h-28 -z-10 rounded-full bg-[url('/images/hero-bg4.jpeg')]"></div>
-        </div>
+          <motion.div
+            style={{
+              x: layer1X,
+              y: layer1Y,
+            }}
+            className="absolute bottom-0 left-0 -rotate-20 w-32 h-28 -z-10 rounded-full bg-[url('/images/hero-bg4.jpeg')]"
+          ></motion.div>
+        </motion.div>
       </div>
     </header>
   );

@@ -26,18 +26,27 @@ const Nav = () => {
   };
 
   useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      clearTimeout(timeout);
+
+      timeout = setTimeout(() => {
+        setScrolled(window.scrollY > 40);
+      }, 10);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeout);
+    };
   }, []);
 
   return (
     <header
       className="sticky px-4 py-10 bg-white top-0 z-50 transition-all duration-300 
-            data-[scrolled=true]:border-b data-[scrolled=true]:border-gray-200 
             data-[scrolled=true]:shadow-sm data-[scrolled=true]:py-6"
       data-scrolled={scrolled}
     >
