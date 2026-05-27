@@ -5,7 +5,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import Image from 'next/image';
 
 const Hero = () => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Single base source of truth for mouse position (-1 to 1 range)
   const basePositionX = useMotionValue(0);
