@@ -27,10 +27,10 @@ const Hero = () => {
   const layer3X = useTransform(smoothX, [-1, 1], [60, -60]);
   const layer3Y = useTransform(smoothY, [-1, 1], [60, -60]);
 
-  const layer4X = useTransform(smoothX, [-1, 1], [90, -90]);
-  const layer4Y = useTransform(smoothY, [-1, 1], [90, -90]);
+  // const layer4X = useTransform(smoothX, [-1, 1], [90, -90]);
+  // const layer4Y = useTransform(smoothY, [-1, 1], [90, -90]);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: MouseEvent) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
 
