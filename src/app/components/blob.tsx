@@ -4,10 +4,10 @@ import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 
 export default function VanillaMouseTracker() {
-  const blobRef = useRef(null);
+  const blobRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       if (blobRef.current) {
         const x = e.clientX - 20;
         const y = e.clientY - 20;

@@ -30,7 +30,7 @@ const Hero = () => {
   // const layer4X = useTransform(smoothX, [-1, 1], [90, -90]);
   // const layer4Y = useTransform(smoothY, [-1, 1], [90, -90]);
 
-  const handleMouseMove = (e: MouseEvent) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
 
