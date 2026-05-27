@@ -34,7 +34,13 @@ export default function VanillaMouseTracker() {
         transition: 'transform 0.1s ease-out',
       }}
     >
-      <Image src="/images/hero-1.png" height={100} width={120} alt="blob" />
+      <Image
+        src="/images/hero-1.png"
+        height={100}
+        width={120}
+        alt="blob"
+        className="hidden md:block"
+      />
     </div>
   );
 }
