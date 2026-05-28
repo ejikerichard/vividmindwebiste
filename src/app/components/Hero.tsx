@@ -7,17 +7,13 @@ import Image from 'next/image';
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Single base source of truth for mouse position (-1 to 1 range)
   const basePositionX = useMotionValue(0);
   const basePositionY = useMotionValue(0);
 
-  // Smooth spring physics configuration
   const springConfig = { damping: 25, stiffness: 180 };
   const smoothX = useSpring(basePositionX, springConfig);
   const smoothY = useSpring(basePositionY, springConfig);
 
-  // 4 Distinct Speeds (Negative values move opposite to the mouse)
-  // Layer 1 (Backpoint) -> Layer 4 (Frontpoint)
   const layer1X = useTransform(smoothX, [-1, 1], [15, -15]);
   const layer1Y = useTransform(smoothY, [-1, 1], [15, -15]);
 
@@ -27,9 +23,6 @@ const Hero = () => {
   const layer3X = useTransform(smoothX, [-1, 1], [60, -60]);
   const layer3Y = useTransform(smoothY, [-1, 1], [60, -60]);
 
-  // const layer4X = useTransform(smoothX, [-1, 1], [90, -90]);
-  // const layer4Y = useTransform(smoothY, [-1, 1], [90, -90]);
-
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -37,7 +30,6 @@ const Hero = () => {
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 
-    // Normalize coordinates to a clean -1 to 1 range
     const normX = (e.clientX - centerX) / (rect.width / 2);
     const normY = (e.clientY - centerY) / (rect.height / 2);
 
@@ -46,7 +38,6 @@ const Hero = () => {
   };
 
   const handleMouseLeave = () => {
-    // Return all 4 layers smoothly to dead-center
     basePositionX.set(0);
     basePositionY.set(0);
   };
@@ -66,7 +57,7 @@ const Hero = () => {
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="relative h-[40vh] xl:h-auto perspective-normal mt-16 lg:mt-0"
+        className="relative w-full h-[55vh] xl:h-auto perspective-normal mt-16 lg:mt-0"
       >
         <motion.div
           style={{
@@ -121,7 +112,7 @@ const Hero = () => {
             x: layer2X,
             y: layer2Y,
           }}
-          className="absolute top-48 right-16 lg:top-16 lg:right-0 col-start-2 row-start-3 xl:col-start-4 xl:row-start-3 skew-1 translate-z-12 rotate-x-0"
+          className="absolute top-48 right-4 lg:top-16 lg:right-0 col-start-2 row-start-3 xl:col-start-4 xl:row-start-3 skew-1 translate-z-12 rotate-x-0"
         >
           <Image
             src="/images/hero/hero-3.png"
