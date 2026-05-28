@@ -14,6 +14,8 @@
 
   --font-header: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
+
+  --breakpoint-xs: 480px;
 }
 
 @layer components {
