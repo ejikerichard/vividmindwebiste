@@ -72,6 +72,7 @@ const Hero = () => {
               alt="Hero Image"
               width={140}
               height={160}
+              priority
               className="object-contain w-60 h-60"
             />
           </div>
@@ -96,6 +97,7 @@ const Hero = () => {
             alt="Hero Image"
             width={120}
             height={140}
+            priority
             className="object-contain w-60 h-60"
           />
           <motion.div
@@ -119,6 +121,7 @@ const Hero = () => {
             alt="Hero Image"
             width={128}
             height={160}
+            priority
             className="object-contain w-48 h-48"
           />
           <motion.div
@@ -142,6 +145,7 @@ const Hero = () => {
             alt="Hero Image"
             width={270}
             height={360}
+            priority
             className="object-contain w-44 h-44"
           />
           <motion.div

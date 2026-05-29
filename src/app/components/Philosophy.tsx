@@ -35,6 +35,7 @@ const Philosophy = () => {
               width={136}
               height={140}
               loading="eager"
+              priority
             />
           </div>
           <div className="mt-4">
@@ -52,6 +53,7 @@ const Philosophy = () => {
               alt="emotional resonance"
               className="w-34 h-40 hover:-rotate-12 hover:scale-110 transition-transform"
               loading="eager"
+              priority
               width={146}
               height={160}
             />
@@ -71,6 +73,7 @@ const Philosophy = () => {
               alt="innovation first"
               className="w-42 h-35 hover:rotate-12 hover:scale-110 transition-transform"
               loading="eager"
+              priority
               width={136}
               height={140}
             />
@@ -90,6 +93,7 @@ const Philosophy = () => {
               alt="collaborative vision"
               className="w-42 h-35 hover:-rotate-12 hover:scale-110 transition-transform"
               loading="eager"
+              priority
               width={156}
               height={140}
             />
