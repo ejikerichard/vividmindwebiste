@@ -34,6 +34,7 @@ const Philosophy = () => {
               className="w-34 h-35 hover:rotate-12 hover:scale-110 transition-transform"
               width={136}
               height={140}
+              loading="eager"
             />
           </div>
           <div className="mt-4">
@@ -50,6 +51,7 @@ const Philosophy = () => {
               src="/images/emotion.png"
               alt="emotional resonance"
               className="w-34 h-40 hover:-rotate-12 hover:scale-110 transition-transform"
+              loading="eager"
               width={146}
               height={160}
             />
@@ -68,6 +70,7 @@ const Philosophy = () => {
               src="/images/innovation.webp"
               alt="innovation first"
               className="w-42 h-35 hover:rotate-12 hover:scale-110 transition-transform"
+              loading="eager"
               width={136}
               height={140}
             />
@@ -86,6 +89,7 @@ const Philosophy = () => {
               src="/images/collaboration.png"
               alt="collaborative vision"
               className="w-42 h-35 hover:-rotate-12 hover:scale-110 transition-transform"
+              loading="eager"
               width={156}
               height={140}
             />
